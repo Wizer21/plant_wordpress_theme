@@ -101,14 +101,14 @@ register_meta( 'plant', '<plant>', array( 'show_in_rest' => true ) );
 // MY CODE
 add_action('rest_api_init', function() {
 	function buildPlantList($list){		
-		$strucuredList = new StdClass();
+		$strucuredList = [];
 
-		foreach ($list as $key => $plant){
+		foreach ($list as $plant){
 			$newPlant = get_fields($plant->ID);
 			$newPlant['id'] =  $plant->ID;
 			$newPlant['likes'] = (int)$newPlant['likes'];
 			
-			$strucuredList->$key = $newPlant;
+			array_push($strucuredList, $newPlant);
 		};
 
 		return $strucuredList;
